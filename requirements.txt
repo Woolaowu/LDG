@@ -9,3 +9,4 @@ dgl==0.4.3.post2
 torchdiffeq==0.0.1
 node2vec==0.3.2
 gensim==3.8.3
+pandas==1.0.4
