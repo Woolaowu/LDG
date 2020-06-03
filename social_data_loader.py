@@ -36,7 +36,7 @@ class SocialEvolutionDataset(EventsDataset):
                                datetime.datetime(2009, 6, 10), datetime.datetime(2009, 6, 20), datetime.datetime(2009, 6, 30)]
         self.FIRST_DATE = SocialEvolutionDataset.FIRST_DATE
         self.event_types = SocialEvolutionDataset.EVENT_TYPES
-
+        """
         k = 1  # k >= 1 for communication events
         for t in self.event_types:
             print(t, k, len(data.EVENT_TYPES[t].tuples))
@@ -46,7 +46,7 @@ class SocialEvolutionDataset(EventsDataset):
             self.all_events.extend(events)
             self.event_types_num[t] = k
             k += 1
-
+        """
         n = len(self.all_events)
         self.N_nodes = subj_features.shape[0]
 
@@ -55,7 +55,7 @@ class SocialEvolutionDataset(EventsDataset):
 
             print('initial and final associations', self.MainAssociation, Adj_all.sum(), Adj_all_last.sum(),
                   np.allclose(Adj_all, Adj_all_last))
-
+        
 
         # Initial topology
         if len(list(data.Adj.keys())) > 0:
@@ -254,7 +254,7 @@ class CSVReader:
 
             values_valid = [values[i] for i in self.valid_ids]
             self.data[key] = np.unique(values_valid)
-            print(key, type(values[0]), len(self.data[key]), self.data[key])
+            #print(key, type(values[0]), len(self.data[key]), self.data[key])
 
         self.subjects, self.time_stamps = [], []
         for usr_col in range(len(user_columns)):
@@ -289,7 +289,7 @@ class CSVReader:
         self.tuples = list(set(itertools.chain(self.tuples)))
         self.tuples = sorted(self.tuples, key=lambda t: t[3].timestamp())
         n2 = len(self.tuples)
-        print('%d/%d duplicates removed' % (n1 - n2, n1))
+        #print('%d/%d duplicates removed' % (n1 - n2, n1))
 
 
 class SubjectsReader:
@@ -342,6 +342,7 @@ class SocialEvolution():
         print('Number of subjects', self.N_subjects)
 
         # Read communicative events
+        """
         self.EVENT_TYPES = {}
         for t in SocialEvolutionDataset.EVENT_TYPES:
             self.EVENT_TYPES[t] = CSVReader(pjoin(data_dir, '%s.csv' % t),
@@ -349,7 +350,7 @@ class SocialEvolution():
                                            MIN_EVENT_PROB=MIN_EVENT_PROB,
                                            event_type=t,
                                            N_subjects=self.N_subjects)
-
+        """
         # Compute adjacency matrices for associative relationship data
         self.Adj = {}
         dates = self.relations.data['survey.date']
